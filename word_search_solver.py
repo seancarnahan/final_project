@@ -70,16 +70,17 @@ def find_words( num_of_rows, num_of_cols, word_search, words_to_search):
     for word in words_to_search:
         while True:
             if is_forward_word(word_search, word, num_of_rows, num_of_cols):
+                print("------------------------")
                 break
-            elif is_downwards_word(word_search, word, num_of_rows, num_of_cols):
+            elif not is_downwards_word(word_search, word, num_of_rows, num_of_cols):
                 break
-            elif is_diag_word(word_search, word, num_of_rows, num_of_cols):
+            elif not is_diag_word(word_search, word, num_of_rows, num_of_cols):
                 break
-            elif is_reverse_forward_word(word_search, word, num_of_rows, num_of_cols):
+            elif not is_reverse_forward_word(word_search, word, num_of_rows, num_of_cols):
                 break
-            elif is_reverse_downward_word(word_search, word, num_of_rows, num_of_cols):
+            elif not is_reverse_downward_word(word_search, word, num_of_rows, num_of_cols):
                 break
-            elif is_reverse_diag_word(word_search, word, num_of_rows, num_of_cols):
+            elif not is_reverse_diag_word(word_search, word, num_of_rows, num_of_cols):
                 break
             else:
                 print("______FAILURE___________")
@@ -96,8 +97,44 @@ def is_forward_word(word_search: list, word: str, num_of_rows: int, num_of_cols:
     ending_point_init = 0
     ending_point_close = 0
 
+    i = 0
+
+    for row in range(0, num_of_rows):
+        for col in range(0, num_of_cols):
+
+            i = 0
+
+
+
+            if word_search[row][col] == word[i]:
+                leftover_col = num_of_cols - col
+
+                for new_col in range(col, leftover_col):
+                    if word_search[row][new_col] == word[i]:
+                        print(word_search[row][col])
+
+                        if i == len(word):
+                            print("check win")
+                            starting_point_init = row
+                            starting_point_close = col
+                            ending_point_init = row
+                            ending_point_close = new_col
+                            is_forward = True
+                            break
+                        else:
+                            i += 1
+                    else:
+                        i = 0
+                        break
+            elif is_forward:
+                break
+
+
+        if is_forward:
+            break
+
     if is_forward:
-        print(word + "starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close )+ ")" )
+        print(word + " starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close )+ ")" )
     return is_forward
 
 def is_downwards_word(word_search: list, word: str, num_of_rows: int, num_of_cols: int) -> bool:
@@ -108,7 +145,7 @@ def is_downwards_word(word_search: list, word: str, num_of_rows: int, num_of_col
     ending_point_close = 0
 
     if is_downward:
-        print(word + "starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close) + ")")
+        print(word + " starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close) + ")")
     return is_downward
 
 def is_diag_word(word_search: list, word: str, num_of_rows: int, num_of_cols: int)-> bool:
@@ -119,7 +156,7 @@ def is_diag_word(word_search: list, word: str, num_of_rows: int, num_of_cols: in
     ending_point_close = 0
 
     if is_diag:
-        print(word + "starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close) + ")")
+        print(word + " starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close) + ")")
     return is_diag
 
 def is_reverse_forward_word(word_search: list, word: str, num_of_rows: int, num_of_cols: int) -> bool:
@@ -130,7 +167,7 @@ def is_reverse_forward_word(word_search: list, word: str, num_of_rows: int, num_
     ending_point_close = 0
 
     if is_rev_forward:
-        print(word + "starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close) + ")")
+        print(word + " starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close) + ")")
     return is_rev_forward
 
 def is_reverse_downward_word(word_search: list, word: str, num_of_rows: int, num_of_cols: int) -> bool:
@@ -141,7 +178,7 @@ def is_reverse_downward_word(word_search: list, word: str, num_of_rows: int, num
     ending_point_close = 0
 
     if is_rev_downward:
-        print(word + "starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close) + ")")
+        print(word + " starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close) + ")")
     return is_rev_downward
 
 def is_reverse_diag_word(word_search: list, word: str, num_of_rows: int, num_of_cols: int) -> bool:
@@ -152,7 +189,7 @@ def is_reverse_diag_word(word_search: list, word: str, num_of_rows: int, num_of_
     ending_point_close = 0
 
     if is_rev_diag:
-        print(word + "starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close) + ")")
+        print(word + " starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close) + ")")
     return is_rev_diag
 
 
@@ -162,3 +199,22 @@ def is_reverse_diag_word(word_search: list, word: str, num_of_rows: int, num_of_
 
 if __name__ == "__main__":
     main()
+
+
+"""clean version of word_search
+J H C J B E H U C Y M J A L Q
+N Q Q H K C B V T E X U F A E
+W O T A X E J K G N B P V M D
+C H C O U I R D P O F X X Z B
+Q M F R C P L P B H X K S L S
+H L I E A R F C Q V O H M D D
+K V F V P E A S Y Q P Z O J L
+H K Z N L T V G P C N G H D L
+R R Z V B S H D S M X Y T L B
+N A A R D A G G Q S I S D N A
+O Y F W O M W E I L P X J R Z
+Y D F C R W O S A U Z Y O T W
+K H M E E A L N C C G X L F B
+L Z F F S K Q I E L A R S S B
+X Z O H P D M J W Y C V D P A
+"""
