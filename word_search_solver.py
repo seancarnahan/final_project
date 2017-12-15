@@ -277,6 +277,15 @@ def is_reverse_diag_word(word_search: list, word: str, num_of_rows: int, num_of_
     starting_point_close = 0
     ending_point_init = 0
     ending_point_close = 0
+    possible_cols = len(word) - 2
+    possible_rows = len(word) - 2
+
+    for row in range(num_of_rows - 1, possible_rows, -1):
+        for col in range(num_of_cols - 1, possible_cols, -1):
+            if word_search[row][col] == word[0]:
+                pass
+
+
 
 
     if is_rev_diag:
