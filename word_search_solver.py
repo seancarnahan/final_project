@@ -88,9 +88,11 @@ def find_words( num_of_rows, num_of_cols, word_search, words_to_search):
                 print("______FAILURE___________")
                 break
         """
-        is_forward_word(word_search, word, num_of_rows, num_of_cols)
-        is_downwards_word(word_search, word, num_of_rows, num_of_cols)
-        is_diag_word(word_search, word, num_of_rows, num_of_cols)
+        #is_forward_word(word_search, word, num_of_rows, num_of_cols)
+        #is_downwards_word(word_search, word, num_of_rows, num_of_cols)
+        #is_diag_word(word_search, word, num_of_rows, num_of_cols)
+
+        is_reverse_forward_word(word_search, word, num_of_rows, num_of_cols)
 
 
 
@@ -206,7 +208,30 @@ def is_reverse_forward_word(word_search: list, word: str, num_of_rows: int, num_
     starting_point_close = 0
     ending_point_init = 0
     ending_point_close = 0
+    word_length = len(word)
+    possible_cols = word_length - 2
+    current_col = 0
 
+    for row in range(num_of_rows):
+        for col in range(num_of_cols - 1, possible_cols, -1):
+            if word_search[row][col] == word[0]:
+                counter = 0
+
+                for curr_col in range(col, col - word_length, -1):
+                    if word_search[row][curr_col] == word[counter]:
+                        counter += 1
+                        current_col = curr_col
+                    else:
+                        break
+                if counter == word_length:
+                    is_rev_forward = True
+                    starting_point_init = row
+                    starting_point_close = col
+                    ending_point_init = row
+                    ending_point_close = current_col
+                    break
+        if is_rev_forward:
+            break
     if is_rev_forward:
         print(word + " starts at (" + str(starting_point_init) + ", " + str(starting_point_close) + ") and ends at (" + str(ending_point_init) + ", " + str(ending_point_close) + ")")
     return is_rev_forward
